@@ -12,7 +12,7 @@ export default function MainLayout({
     <NextThemesProvider {...props}>
       <div className="flex">
         <SideBar />
-        <main>{children}</main>
+        <main className="w-full">{children}</main>
       </div>
     </NextThemesProvider>
   );
