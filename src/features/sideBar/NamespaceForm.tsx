@@ -8,7 +8,8 @@ import {
   FileInput,
   formSchema,
   type FormType,
-} from "@/src/entities/";
+  VersionInput,
+} from "@/src/entities/sideBar";
 import { Form } from "@/src/shared/ui/form";
 import { Button } from "@/src/shared/ui/button";
 
@@ -29,6 +30,7 @@ export default function NamespaceForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-4">
         <NamespaceInput control={form.control} />
+        <VersionInput />
         <FileInput control={form.control} />
         <Button type="submit">Submit</Button>
       </form>

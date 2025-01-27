@@ -11,10 +11,10 @@ import { Input } from "@/src/shared/ui/input";
 
 import type { FormType } from "./sideBar.type";
 import { ChangeEvent, useState, type DragEvent } from "react";
-import { cn } from "../shared/lib/utils";
+import { cn } from "../../shared/lib/utils";
 import { FileJson } from "lucide-react";
-import { Button } from "../shared/ui/button";
-import { Label } from "../shared/ui/label";
+import { Button } from "../../shared/ui/button";
+import { Label } from "../../shared/ui/label";
 
 type Props = {
   control: Control<FormType>;
