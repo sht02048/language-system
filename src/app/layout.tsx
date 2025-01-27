@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import MainLayout from "@/components/layouts/MainLayout";
+import { MainLayout } from "../pages/layouts";
 
 export const metadata: Metadata = {
   title: "Create Next App",

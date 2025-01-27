@@ -16,7 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/shared/lib/utils";
 import { Button } from "@/components/ui/button";
 
 interface Combo {
