@@ -34,6 +34,7 @@ model TranslationKey {
   id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt   DateTime      @default(now()) @db.Timestamptz(6)
   namespaceId String        @db.Uuid
+  name        String
   Translation Translation[]
   Namespace   Namespace     @relation(fields: [namespaceId], references: [id], onDelete: Cascade)
 }
@@ -50,6 +51,6 @@ enum language {
   en
   ja
   zh
-  zhHant
+  zh_Hant @map("zh-Hant")
   ko
 }
