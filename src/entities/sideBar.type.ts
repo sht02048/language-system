@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const FormSchema = z.object({
+export const formSchema = z.object({
   namespace: z.string().min(2, {
     message: "Namespace must be at least 2 characters.",
   }),
@@ -9,4 +9,4 @@ export const FormSchema = z.object({
   }),
 });
 
-export type FormType = z.infer<typeof FormSchema>;
+export type FormType = z.infer<typeof formSchema>;

@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   NamespaceInput,
   FileInput,
-  FormSchema,
+  formSchema,
   type FormType,
 } from "@/src/entities/";
 import { Form } from "@/src/shared/ui/form";
@@ -14,12 +14,20 @@ import { Button } from "@/src/shared/ui/button";
 
 export default function NamespaceForm() {
   const form = useForm<FormType>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      namespace: "",
+    },
   });
+
+  function onSubmit(values: FormType) {
+    console.log(values);
+    console.log(123);
+  }
 
   return (
     <Form {...form}>
-      <form className="space-y-6 mt-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-4">
         <NamespaceInput control={form.control} />
         <FileInput control={form.control} />
         <Button type="submit">Submit</Button>

@@ -24,7 +24,12 @@ export default function NamespaceInput({ control }: Props) {
         <FormItem>
           <FormLabel>Namespace</FormLabel>
           <FormControl>
-            <Input className="w-1/3" {...field} />
+            <Input
+              className="w-1/3"
+              type="text"
+              placeholder="put namespace"
+              {...field}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

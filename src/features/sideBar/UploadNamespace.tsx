@@ -18,9 +18,8 @@ export default function UploadNamespace() {
       <DialogContent className="min-w-[700px] min-h-[700px]">
         <DialogHeader>
           <DialogTitle>Import language data by JSON</DialogTitle>
-          <DialogDescription>
-            <NamespaceForm />
-          </DialogDescription>
+          <NamespaceForm />
+          <DialogDescription />
         </DialogHeader>
       </DialogContent>
     </Dialog>
