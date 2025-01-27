@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { SideBar } from "@/src/widgets/layouts";
+import { SideBar } from "@/src/widgets/sideBar";
 
 export default function MainLayout({
   children,
