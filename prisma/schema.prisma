@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Namespace {
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt      DateTime         @default(now()) @db.Timestamptz(6)
+  name           String           @unique
+  versionId      String           @db.Uuid
+  Version        Version          @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  TranslationKey TranslationKey[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Translation {
+  id               String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt        DateTime       @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime       @default(now()) @db.Timestamptz(6)
+  language         language
+  translationKeyId String         @db.Uuid
+  value            String?
+  TranslationKey   TranslationKey @relation(fields: [translationKeyId], references: [id], onDelete: Cascade)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model TranslationKey {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime      @default(now()) @db.Timestamptz(6)
+  namespaceId String        @db.Uuid
+  Translation Translation[]
+  Namespace   Namespace     @relation(fields: [namespaceId], references: [id], onDelete: Cascade)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Version {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime    @default(now()) @db.Timestamptz(6)
+  name      String      @unique
+  Namespace Namespace[]
+}
+
+enum language {
+  en
+  ja
+  zh
+  zhHant
+  ko
+}
