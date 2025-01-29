@@ -10,7 +10,13 @@ export default function MainLayout({
     <NextThemesProvider {...props}>
       <div className="flex">
         <SideBar />
-        <main className="w-full">{children}</main>
+        <main className="w-full">
+          <div className="m-2">
+            <div className="bg-[#101011] rounded-md h-screen border-[0.5px]">
+              {children}
+            </div>
+          </div>
+        </main>
       </div>
     </NextThemesProvider>
   );
