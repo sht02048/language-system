@@ -27,7 +27,7 @@ export default function NamespaceInput({ control }: Props) {
             <Input
               className="w-1/3"
               type="text"
-              placeholder="put namespace"
+              placeholder="Enter a namespace"
               {...field}
             />
           </FormControl>

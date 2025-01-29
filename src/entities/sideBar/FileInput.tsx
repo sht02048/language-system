@@ -20,7 +20,7 @@ type Props = {
   control: Control<FormType>;
 };
 
-export default function NamespaceInput({ control }: Props) {
+export default function FileInput({ control }: Props) {
   const [fileName, setFileName] = useState<string>("");
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
@@ -58,14 +58,23 @@ export default function NamespaceInput({ control }: Props) {
     }
   };
 
-  const handleFileChange = (
+  const handleFileChange = async (
     e: ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<FormType>,
   ) => {
     const file = e.target.files?.[0];
     if (file) {
       setFileName(file.name);
-      field.onChange(file);
+
+      const fileContent = await file.text();
+
+      try {
+        const jsonContent = JSON.parse(fileContent);
+        field.onChange(JSON.stringify(jsonContent));
+      } catch (err) {
+        console.error("Invalid JSON file", err);
+        field.onChange(null);
+      }
     }
   };
 
