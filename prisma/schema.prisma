@@ -26,6 +26,7 @@ model Translation {
   language         language
   translationKeyId String         @db.Uuid
   value            String?
+  subKey           String?        @default("")
   TranslationKey   TranslationKey @relation(fields: [translationKeyId], references: [id], onDelete: Cascade)
 }
 
