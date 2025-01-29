@@ -10,14 +10,14 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/src/shared/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/src/shared/ui/popover";
 import { cn } from "@/src/shared/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/shared/ui/button";
 
 interface Combo {
   value: string;
