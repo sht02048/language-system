@@ -11,3 +11,9 @@ export async function getVersion(version: string) {
 
   return res;
 }
+
+export async function getAllVersion() {
+  const versions = await prisma.version.findMany();
+
+  return versions;
+}

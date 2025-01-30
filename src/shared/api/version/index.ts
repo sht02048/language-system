@@ -1,3 +1,3 @@
-import { getVersion } from "./version.api";
+import { getVersion, getAllVersion } from "./version.api";
 
-export { getVersion };
+export { getVersion, getAllVersion };

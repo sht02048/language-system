@@ -26,3 +26,16 @@ export async function findCreateNamespace({ namespace, versionId }: Namespace) {
 
   return res;
 }
+
+export async function getNamespace({ namespace, versionId }: Namespace) {
+  const res = await prisma.namespace.findUnique({
+    where: {
+      name: namespace,
+      versionId,
+    },
+  });
+
+  if (res === null) throw new Error("not existing version");
+
+  return res;
+}

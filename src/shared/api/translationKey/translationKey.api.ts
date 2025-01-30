@@ -32,3 +32,13 @@ export async function findCreateTranslationKey({
 
   return res;
 }
+
+export async function getAllTranslationKeyByNamespace(namespaceId: string) {
+  const res = await prisma.translationKey.findMany({
+    where: {
+      namespaceId,
+    },
+  });
+
+  return res;
+}

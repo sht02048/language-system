@@ -1,3 +1,7 @@
-import { createNamespace, findCreateNamespace } from "./namespace.api";
+import {
+  createNamespace,
+  findCreateNamespace,
+  getNamespace,
+} from "./namespace.api";
 
-export { createNamespace, findCreateNamespace };
+export { createNamespace, findCreateNamespace, getNamespace };
