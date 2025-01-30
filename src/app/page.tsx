@@ -1,10 +1,13 @@
 import { redirect } from "next/navigation";
-import { getVersion } from "./api/router";
+import { getAllVersion } from "@/src/shared/api/version";
+import { Home } from "../page/home";
 
-const DEFAULT_NAMESPACE = "activeMode";
+const DEFAULT_NAMESPACE = "auth";
 
-export default async function Home() {
-  const versions = await getVersion();
+export default async function Page() {
+  const versions = await getAllVersion();
+
+  if (versions.length === 0) return <Home />;
 
   const latestVersion = versions.sort((a, b) => {
     const aDate = new Date(a.createdAt).getTime();

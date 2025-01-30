@@ -16,7 +16,7 @@ export default async function Page({
   searchParams: TableParams;
 }) {
   const safeParams = tableParamsSchema.parse(searchParams);
-  const version = await getVersion(searchParams.version);
+  const version = await getVersion(safeParams.version);
   const namespace = await getNamespace({
     versionId: version.id,
     namespace: searchParams.namespace,
@@ -26,10 +26,5 @@ export default async function Page({
 
   const languages = await Promise.all(translationKeys.map(pivotLanguage));
 
-  return (
-    <>
-      <Table data={languages} />
-      {safeParams.version}
-    </>
-  );
+  return <Table data={languages} />;
 }
