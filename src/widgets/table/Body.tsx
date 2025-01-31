@@ -1,4 +1,4 @@
-import { flexRender, Table as TableType } from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import {
   Table,
   TableBody,
@@ -7,12 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/shared/ui/table";
-import { TableLanguage } from "@/src/page/table/table.type";
+import { PropsWithTable } from "@/src/entities/table";
 
 type Props = {
-  table: TableType<TableLanguage>;
   columnLength: number;
-};
+} & PropsWithTable;
 
 export default function Body({ table, columnLength }: Props) {
   return (

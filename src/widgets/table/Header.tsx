@@ -16,7 +16,16 @@ export default function Header({ table }: PropsWithTable) {
   return (
     <div className="flex justify-between gap-4 m-4">
       <div className="flex gap-4">
-        <Input placeholder="filter by Korean" className="w-64" />
+        <Input
+          placeholder="filter by LanguageKey"
+          value={
+            (table.getColumn("languageKey")?.getFilterValue() as string) ?? ""
+          }
+          onChange={(event) =>
+            table.getColumn("languageKey")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
         <ComboBox
           placeHolder="Enter version"
           combos={versions}
