@@ -1,3 +1,3 @@
-import prisma from "./prisma.api";
+import { prisma } from "./prisma.api";
 
 export { prisma };
