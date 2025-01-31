@@ -5,7 +5,9 @@ const columns: ColumnDef<TableLanguage>[] = [
   {
     accessorKey: "languageKey",
     header: "Language Key ",
-    cell: ({ row }) => <div>{row.getValue("languageKey")}</div>,
+    cell: ({ row }) => (
+      <code className="font-medium">{row.getValue("languageKey")}</code>
+    ),
   },
   {
     accessorKey: "en",
