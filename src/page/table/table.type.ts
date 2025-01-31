@@ -6,12 +6,3 @@ export const tableParamsSchema = z.object({
 });
 
 export type TableParams = z.infer<typeof tableParamsSchema>;
-
-export type TableLanguage = {
-  languageKey: string;
-  en: string;
-  ko: string;
-  ja: string;
-  zh: string;
-  zhHant: string;
-};

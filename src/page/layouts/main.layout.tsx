@@ -10,7 +10,7 @@ export default function MainLayout({
     <NextThemesProvider {...props}>
       <div className="flex">
         <SideBar />
-        <main className="w-full">
+        <main className="w-full overflow-x-hidden">
           <div className="m-2">
             <div className="bg-[#101011] rounded-md h-screen border-[0.5px]">
               {children}

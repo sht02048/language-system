@@ -12,9 +12,9 @@ import {
 import { useState } from "react";
 
 import { Header, Body } from "@/src/widgets/table";
+import { TableLanguage } from "@/src/entities/table";
 
 import columns from "./table.column";
-import { TableLanguage } from "./table.type";
 
 type Props = {
   data: TableLanguage[];
@@ -23,7 +23,9 @@ type Props = {
 export default function Table({ data }: Props) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    subKey: false,
+  });
 
   const table = useReactTable({
     data,

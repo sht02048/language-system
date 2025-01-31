@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { TableLanguage } from "./table.type";
+import { TableLanguage } from "@/src/entities/table";
 
 const columns: ColumnDef<TableLanguage>[] = [
   {
@@ -8,6 +8,11 @@ const columns: ColumnDef<TableLanguage>[] = [
     cell: ({ row }) => (
       <code className="font-medium">{row.getValue("languageKey")}</code>
     ),
+  },
+  {
+    accessorKey: "subKey",
+    header: "SubKey",
+    cell: ({ row }) => <div>{row.getValue("subKey")}</div>,
   },
   {
     accessorKey: "en",
