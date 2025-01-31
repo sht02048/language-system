@@ -1,16 +1,11 @@
-import { Table } from "@tanstack/react-table";
 import { useSearchParams } from "next/navigation";
 
 import { Input } from "@/src/shared/ui/input";
+import { PropsWithTable } from "@/src/entities/table";
 import { useVersionAndNamespace } from "@/src/shared/hooks";
-import { TableLanguage } from "@/src/page/table/table.type";
 import { ComboBox, Pagination } from "@/src/features/table";
 
-type Props = {
-  table: Table<TableLanguage>;
-};
-
-export default function Header({ table }: Props) {
+export default function Header({ table }: PropsWithTable) {
   const searchParams = useSearchParams();
   const currentVersion = searchParams.get("version");
   const currentNamespace = searchParams.get("namespace");
