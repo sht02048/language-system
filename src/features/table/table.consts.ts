@@ -1,0 +1,6 @@
+const MAXIMUM_TEXT_LENGTH = {
+  BIG_CHARACTER: 10,
+  SMALL_CHARACTER: 20,
+} as const;
+
+export { MAXIMUM_TEXT_LENGTH };
