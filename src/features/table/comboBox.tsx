@@ -19,17 +19,13 @@ import {
 import { cn } from "@/src/shared/lib/utils";
 import { Button } from "@/src/shared/ui/button";
 
-interface Combo {
-  value: string;
-  label: string;
-}
-
-interface Props {
+type Props = {
   placeHolder: string;
-  combos: Combo[];
-}
+  combos: string[];
+  defaultValue: string;
+};
 
-export default function ComboboxDemo({ placeHolder, combos }: Props) {
+export default function ComboBox({ defaultValue, placeHolder, combos }: Props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
@@ -40,11 +36,9 @@ export default function ComboboxDemo({ placeHolder, combos }: Props) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-32 justify-between"
+          className="justify-between w-32"
         >
-          {value
-            ? combos.find((combo) => combo.value === value)?.label
-            : placeHolder}
+          {value ? combos.find((combo) => combo === value) : defaultValue}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -54,20 +48,20 @@ export default function ComboboxDemo({ placeHolder, combos }: Props) {
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
-              {combos.map((framework) => (
+              {combos.map((combo) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={combo}
+                  value={combo}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
-                  {framework.label}
+                  {combo}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === framework.value ? "opacity-100" : "opacity-0",
+                      value === combo ? "opacity-100" : "opacity-0",
                     )}
                   />
                 </CommandItem>

@@ -1,66 +1,30 @@
 import { Input } from "@/src/shared/ui/input";
-import ComboboxDemo from "@/src/shared/ui/comboBox";
+import { ComboBox } from "@/src/features/table";
+import { useVersionAndNamespace } from "@/src/shared/hooks";
 
-const versions = [
-  {
-    value: "v.4.3.1",
-    label: "v.4.3.1",
-  },
-  {
-    value: "v.4.3.0",
-    label: "v.4.3.0",
-  },
-  {
-    value: "v.4.2",
-    label: "v.4.2",
-  },
-  {
-    value: "v.4.1",
-    label: "v.4.1",
-  },
-  {
-    value: "v.3.1",
-    label: "v.3.1",
-  },
-  {
-    value: "v.3.0",
-    label: "v.3.0",
-  },
-];
-
-const jsonTypes = [
-  {
-    value: "activeMode",
-    label: "activeMode",
-  },
-  {
-    value: "auth",
-    label: "auth",
-  },
-  {
-    value: "common",
-    label: "common",
-  },
-  {
-    value: "dataTab",
-    label: "dataTab",
-  },
-  {
-    value: "documentation",
-    label: "documentation",
-  },
-  {
-    value: "error",
-    label: "error",
-  },
-];
+import { useSearchParams } from "next/navigation";
 
 export default function Header() {
+  const searchParams = useSearchParams();
+  const currentVersion = searchParams.get("version");
+  const currentNamespace = searchParams.get("namespace");
+  const { versions, namespaces } = useVersionAndNamespace(currentVersion ?? "");
+
+  if (!currentVersion || !currentNamespace) return null;
+
   return (
     <div className="flex gap-4 m-4">
       <Input placeholder="filter by Korean" className="w-64" />
-      <ComboboxDemo placeHolder="version" combos={versions} />
-      <ComboboxDemo placeHolder="file" combos={jsonTypes} />
+      <ComboBox
+        placeHolder="Enter version"
+        combos={versions}
+        defaultValue={currentVersion}
+      />
+      <ComboBox
+        placeHolder="Enter namespace"
+        combos={namespaces}
+        defaultValue={currentNamespace}
+      />
     </div>
   );
 }

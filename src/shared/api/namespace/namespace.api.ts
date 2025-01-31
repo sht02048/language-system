@@ -39,3 +39,13 @@ export async function getNamespace({ namespace, versionId }: Namespace) {
 
   return res;
 }
+
+export async function getNamespacesByVersion(versionId: string) {
+  const res = await prisma.namespace.findMany({
+    where: {
+      versionId,
+    },
+  });
+
+  return res;
+}

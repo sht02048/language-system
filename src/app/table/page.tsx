@@ -8,8 +8,6 @@ import { getVersion } from "@/src/shared/api/version";
 import { getNamespace } from "@/src/shared/api/namespace";
 import { getAllTranslationKeyByNamespace } from "@/src/shared/api/translationKey";
 
-export { type TableParams, TableParamsSchema } from "./type";
-
 export default async function Page({
   searchParams,
 }: {
