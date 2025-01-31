@@ -1,42 +1,10 @@
-import { useSearchParams } from "next/navigation";
-
-import { Input } from "@/src/shared/ui/input";
 import { PropsWithTable } from "@/src/entities/table";
-import { useVersionAndNamespace } from "@/src/shared/hooks";
-import { ComboBox, Pagination } from "@/src/features/table";
+import { Pagination, TableFilter } from "@/src/features/table";
 
 export default function Header({ table }: PropsWithTable) {
-  const searchParams = useSearchParams();
-  const currentVersion = searchParams.get("version");
-  const currentNamespace = searchParams.get("namespace");
-  const { versions, namespaces } = useVersionAndNamespace(currentVersion ?? "");
-
-  if (!currentVersion || !currentNamespace) return null;
-
   return (
     <div className="flex justify-between gap-4 m-4">
-      <div className="flex gap-4">
-        <Input
-          placeholder="filter by LanguageKey"
-          value={
-            (table.getColumn("languageKey")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("languageKey")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <ComboBox
-          placeHolder="Enter version"
-          combos={versions}
-          defaultValue={currentVersion}
-        />
-        <ComboBox
-          placeHolder="Enter namespace"
-          combos={namespaces}
-          defaultValue={currentNamespace}
-        />
-      </div>
+      <TableFilter table={table} />
       <Pagination table={table} />
     </div>
   );

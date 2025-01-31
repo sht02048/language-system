@@ -1,5 +1,5 @@
-import ComboBox from "./comboBox";
 import ColumnDiv from "./ColumnDiv";
 import Pagination from "./Pagination";
+import TableFilter from "./TableFilter";
 
-export { ComboBox, ColumnDiv, Pagination };
+export { ColumnDiv, Pagination, TableFilter };

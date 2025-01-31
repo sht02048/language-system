@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import {
@@ -18,6 +17,7 @@ import {
 } from "@/src/shared/ui/popover";
 import { cn } from "@/src/shared/lib/utils";
 import { Button } from "@/src/shared/ui/button";
+import { useState } from "react";
 
 type Props = {
   placeHolder: string;
@@ -26,8 +26,8 @@ type Props = {
 };
 
 export default function ComboBox({ defaultValue, placeHolder, combos }: Props) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [value, setValue] = useState<string>("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
