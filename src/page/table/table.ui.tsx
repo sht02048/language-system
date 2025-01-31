@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 
-import { Header, Body, Footer } from "@/src/widgets/table";
+import { Header, Body } from "@/src/widgets/table";
 
 import columns from "./table.column";
 import { TableLanguage } from "./table.type";
@@ -39,13 +39,17 @@ export default function Table({ data }: Props) {
       columnFilters,
       columnVisibility,
     },
+    initialState: {
+      pagination: {
+        pageSize: 20,
+      },
+    },
   });
 
   return (
     <div className="m-2">
-      <Header />
+      <Header table={table} />
       <Body table={table} columnLength={columns.length} />
-      <Footer table={table} />
     </div>
   );
 }
