@@ -28,11 +28,13 @@ export default function TableFilter({ table }: PropsWithTable) {
         placeHolder="Enter version"
         combos={versions}
         defaultValue={currentVersion}
+        param="version"
       />
       <ComboBox
         placeHolder="Enter namespace"
         combos={namespaces}
         defaultValue={currentNamespace}
+        param="namespace"
       />
     </div>
   );

@@ -18,16 +18,31 @@ import {
 import { cn } from "@/src/shared/lib/utils";
 import { Button } from "@/src/shared/ui/button";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {
   placeHolder: string;
   combos: string[];
   defaultValue: string;
+  param: "version" | "namespace";
 };
 
-export default function ComboBox({ defaultValue, placeHolder, combos }: Props) {
+export default function ComboBox({
+  defaultValue,
+  placeHolder,
+  combos,
+  param,
+}: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>(defaultValue);
+
+  const updateQuery = (nextParam: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(param, nextParam);
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -55,6 +70,7 @@ export default function ComboBox({ defaultValue, placeHolder, combos }: Props) {
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
+                    updateQuery(currentValue);
                   }}
                 >
                   {combo}
