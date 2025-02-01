@@ -12,7 +12,7 @@ datasource db {
 model Namespace {
   id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt      DateTime         @default(now()) @db.Timestamptz(6)
-  name           String           @unique
+  name           String
   versionId      String           @db.Uuid
   Version        Version          @relation(fields: [versionId], references: [id], onDelete: Cascade)
   TranslationKey TranslationKey[]
@@ -27,6 +27,8 @@ model Translation {
   translationKeyId String         @db.Uuid
   value            String?
   subKey           String?        @default("")
+  textWidth        Float          @db.Real
+  isResolved       Boolean
   TranslationKey   TranslationKey @relation(fields: [translationKeyId], references: [id], onDelete: Cascade)
 }
 
