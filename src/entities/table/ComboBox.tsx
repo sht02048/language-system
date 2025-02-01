@@ -1,5 +1,3 @@
-"use client";
-
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import {
@@ -51,7 +49,7 @@ export default function ComboBox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between w-32"
+          className="justify-between w-48"
         >
           {value ? combos.find((combo) => combo === value) : defaultValue}
           <ChevronsUpDown className="opacity-50" />

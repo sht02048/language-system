@@ -22,7 +22,7 @@ export default function TableFilter({ table }: PropsWithTable) {
         onChange={(event) =>
           table.getColumn("languageKey")?.setFilterValue(event.target.value)
         }
-        className="max-w-sm"
+        className="max-w-sm w-44"
       />
       <ComboBox
         placeHolder="Enter version"
