@@ -28,7 +28,7 @@ export async function findCreateNamespace({ namespace, versionId }: Namespace) {
 }
 
 export async function getNamespace({ namespace, versionId }: Namespace) {
-  const res = await prisma.namespace.findUnique({
+  const res = await prisma.namespace.findFirst({
     where: {
       name: namespace,
       versionId,

@@ -26,10 +26,10 @@ export async function pivotLanguage(
   return {
     languageKey: translationKey.name,
     subKey,
-    en: translations?.en,
-    ko: translations?.ko,
-    ja: translations?.ja,
-    zh: translations?.zh,
-    zhHant: translations?.zh_Hant,
+    en: translations.en ?? "",
+    ko: translations.ko ?? "",
+    ja: translations.ja ?? "",
+    zh: translations.zh ?? "",
+    zhHant: translations.zh_Hant ?? "",
   };
 }

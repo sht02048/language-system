@@ -1,8 +1,9 @@
 "use server";
 
 import { prisma } from "@/src/shared/api/prisma";
-import { getVersion } from "@/src/shared/api/version";
+import { measureTextWidth } from "@/src/shared/lib";
 import { AppLanguage } from "@/src/shared/constants";
+import { getVersion } from "@/src/shared/api/version";
 import languageMap from "@/src/shared/lib/languageMap";
 import { findCreateNamespace } from "@/src/shared/api/namespace";
 import { findCreateTranslationKey } from "@/src/shared/api/translationKey";
@@ -33,11 +34,15 @@ export async function saveTranslation(formData: FormData) {
     });
 
     if (typeof value === "string") {
+      const textWidth = measureTextWidth(value);
+
       await prisma.translation.create({
         data: {
           value,
           language,
           translationKeyId: translationKey.id,
+          textWidth,
+          isResolved: false,
         },
       });
 
@@ -47,12 +52,16 @@ export async function saveTranslation(formData: FormData) {
     const subInfo: [string, string][] = Object.entries(value);
 
     subInfo.forEach(async ([subKey, nestedValue]) => {
+      const textWidth = measureTextWidth(nestedValue);
+
       await prisma.translation.create({
         data: {
           value: nestedValue,
           translationKeyId: translationKey.id,
           subKey,
           language,
+          textWidth,
+          isResolved: false,
         },
       });
     });
