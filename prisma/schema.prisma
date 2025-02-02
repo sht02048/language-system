@@ -54,6 +54,6 @@ enum language {
   en
   ja
   zh
-  zh_Hant @map("zh-Hant")
+  zhHant
   ko
 }

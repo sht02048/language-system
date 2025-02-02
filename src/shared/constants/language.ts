@@ -2,8 +2,8 @@ const LANGUAGES = [
   "English",
   "Korean",
   "Japanese",
-  "Chinese (traditional)",
   "Chinese (simplified)",
+  "Chinese (traditional)",
 ] as const;
 
 type AppLanguage = (typeof LANGUAGES)[number];

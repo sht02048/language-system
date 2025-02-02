@@ -30,6 +30,6 @@ export async function pivotLanguage(
     ko: translations.ko ?? "",
     ja: translations.ja ?? "",
     zh: translations.zh ?? "",
-    zhHant: translations.zh_Hant ?? "",
+    zhHant: translations.zhHant ?? "",
   };
 }

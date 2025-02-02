@@ -22,8 +22,7 @@ export default function NewVersionForm({ openDialog }: Props) {
     },
   });
 
-  function onSubmit(values: NewVersionFormType) {
-    console.log(values);
+  function onSubmit() {
     openDialog(false);
   }
 

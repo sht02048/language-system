@@ -12,11 +12,11 @@ export default function languageMap(appLanguage: AppLanguage) {
     case "Japanese": {
       return language.ja;
     }
-    case "Chinese (traditional)": {
+    case "Chinese (simplified)": {
       return language.zh;
     }
-    case "Chinese (simplified)": {
-      return language.zh_Hant;
+    case "Chinese (traditional)": {
+      return language.zhHant;
     }
   }
 }
