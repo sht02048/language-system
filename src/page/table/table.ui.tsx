@@ -7,7 +7,6 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnFiltersState,
-  type SortingState,
   type VisibilityState,
 } from "@tanstack/react-table";
 import { useState } from "react";
@@ -22,7 +21,6 @@ type Props = {
 };
 
 export default function Table({ data }: Props) {
-  const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     subKey: false,
@@ -31,7 +29,6 @@ export default function Table({ data }: Props) {
   const table = useReactTable({
     data,
     columns,
-    onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -39,7 +36,6 @@ export default function Table({ data }: Props) {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     state: {
-      sorting,
       columnFilters,
       columnVisibility,
     },
@@ -47,6 +43,16 @@ export default function Table({ data }: Props) {
       pagination: {
         pageSize: 20,
       },
+      sorting: [
+        {
+          id: "languageKey",
+          desc: false,
+        },
+        {
+          id: "subKey",
+          desc: false,
+        },
+      ],
     },
   });
 

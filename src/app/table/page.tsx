@@ -22,7 +22,9 @@ export default async function Page({
 
   const translationKeys = await getAllTranslationKeyByNamespace(namespace.id);
 
-  const languages = await Promise.all(translationKeys.map(pivotLanguage));
+  const languages = (
+    await Promise.all(translationKeys.map(pivotLanguage))
+  ).flat();
 
   return <Table data={languages} />;
 }

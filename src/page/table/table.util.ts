@@ -1,6 +1,10 @@
 import { language } from "@prisma/client";
+
 import { TableLanguage } from "@/src/entities/table";
+import { PrismaTranslation } from "@/src/shared/types";
 import { getTranslationByTranslationKey } from "@/src/shared/api/translation";
+
+import { NO_SUB_KEY } from "./table.consts";
 
 type TranslationKey = {
   id: string;
@@ -10,58 +14,60 @@ type TranslationKey = {
 };
 
 export async function pivotLanguage(
-  translationKey: TranslationKey,
-): Promise<TableLanguage> {
+  translationKey: TranslationKey
+): Promise<TableLanguage[]> {
   const allTranslations = await getTranslationByTranslationKey(
-    translationKey.id,
+    translationKey.id
   );
-  const pivotedTranslations = allTranslations.map((translation) => {
-    const translationLanguage = translation.language;
 
-    return [[translationLanguage], translation.value];
-  });
-  const textWidthByLanguage = allTranslations.reduce(
-    (acc, translation) => {
-      acc[translation.language] = translation.textWidth;
+  const result = allTranslations.reduce<
+    Record<
+      string,
+      Record<
+        language,
+        { value: string; textWidth: number; isResolved: boolean }
+      >
+    >
+  >(
+    (
+      acc,
+      { language, subKey, value, textWidth, isResolved }: PrismaTranslation
+    ) => {
+      const key = subKey || NO_SUB_KEY;
+
+      acc[key] = {
+        ...(acc[key] ?? {}),
+        [language]: { value, textWidth, isResolved },
+      };
+
       return acc;
     },
-    {} as Record<language, number>,
+    {}
   );
-  const resolvedByLanguage = allTranslations.reduce(
-    (acc, translation) => {
-      acc[translation.language] = translation.isResolved;
+
+  return Object.entries(result).map(([subKey, info]) => {
+    const key = subKey === NO_SUB_KEY ? "" : subKey;
+    const englishWidth = info.en.textWidth;
+
+    const longerTexts = Object.entries(info).reduce((acc, [language, data]) => {
+      const { textWidth, isResolved } = data;
+
+      if (textWidth > englishWidth && !isResolved) {
+        acc.push(language);
+      }
+
       return acc;
-    },
-    {} as Record<language, boolean>,
-  );
-  const subKey = allTranslations[0].subKey ?? "";
+    }, [] as language[]);
 
-  const translations = Object.fromEntries(pivotedTranslations);
-
-  const englishWidth = textWidthByLanguage.en;
-
-  // TODO 타입 단언 고치기
-  const textEntires = Object.entries(textWidthByLanguage) as [
-    language,
-    number,
-  ][];
-
-  const longerTexts = textEntires.reduce((acc, [textLanguage, width]) => {
-    const isResolved = resolvedByLanguage[textLanguage];
-    if (width > englishWidth && !isResolved) {
-      acc.push(textLanguage);
-    }
-    return acc;
-  }, [] as language[]);
-
-  return {
-    languageKey: translationKey.name,
-    subKey,
-    en: translations.en ?? "",
-    ko: translations.ko ?? "",
-    ja: translations.ja ?? "",
-    zh: translations.zh ?? "",
-    zhHant: translations.zhHant ?? "",
-    longerTexts,
-  };
+    return {
+      languageKey: translationKey.name,
+      subKey: key,
+      en: info.en?.value ?? "",
+      ko: info.ko?.value ?? "",
+      ja: info.ja?.value ?? "",
+      zh: info.zh?.value ?? "",
+      zhHant: info.zhHant?.value ?? "",
+      longerTexts,
+    };
+  }, {});
 }
