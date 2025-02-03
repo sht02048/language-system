@@ -24,6 +24,7 @@ export async function saveTranslation(formData: FormData) {
     versionId: version.id,
   });
 
+  // @ts-expect-error entries 타입 변경으로 인해 타입 에러 발생
   const translationInfo: [string, string | Record<string, string>][] =
     Object.entries(JSON.parse(String(file)));
 
