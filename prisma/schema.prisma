@@ -25,7 +25,7 @@ model Translation {
   updatedAt        DateTime       @default(now()) @db.Timestamptz(6)
   language         language
   translationKeyId String         @db.Uuid
-  value            String?
+  value            String
   subKey           String?        @default("")
   textWidth        Float          @db.Real
   isResolved       Boolean
