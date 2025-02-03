@@ -1,3 +1,4 @@
+import { language } from "@prisma/client";
 import { Table } from "@tanstack/react-table";
 
 export type PropsWithTable = {
@@ -12,4 +13,5 @@ export type TableLanguage = {
   ja: string;
   zh: string;
   zhHant: string;
+  longerTexts: language[];
 };

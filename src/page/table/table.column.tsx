@@ -53,6 +53,9 @@ const columns: ColumnDef<TableLanguage>[] = [
       />
     ),
   },
+  {
+    accessorKey: "longerTexts",
+  },
 ];
 
 export default columns;
