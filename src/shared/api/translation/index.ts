@@ -1,3 +1,6 @@
-import { getTranslationByTranslationKey } from "./translation.api";
+import {
+  getTranslationByTranslationKey,
+  createTranslation,
+} from "./translation.api";
 
-export { getTranslationByTranslationKey };
+export { getTranslationByTranslationKey, createTranslation };

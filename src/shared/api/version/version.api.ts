@@ -17,3 +17,14 @@ export async function getAllVersion() {
 
   return versions;
 }
+
+export async function createVersion(version: string) {
+  // TODO 같은 버전이 있을때 발생하는 에러 처리 필요
+  const res = await prisma.version.create({
+    data: {
+      name: version,
+    },
+  });
+
+  return res;
+}

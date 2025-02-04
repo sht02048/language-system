@@ -3,6 +3,7 @@ import {
   findCreateNamespace,
   getNamespace,
   getNamespacesByVersion,
+  createManyNamespaces,
 } from "./namespace.api";
 
 export {
@@ -10,4 +11,5 @@ export {
   findCreateNamespace,
   getNamespace,
   getNamespacesByVersion,
+  createManyNamespaces,
 };

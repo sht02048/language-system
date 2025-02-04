@@ -1,6 +1,9 @@
-type Namespace = {
+export type Namespace = {
   namespace: string;
   versionId: string;
 };
 
-export type { Namespace };
+export type MultiNamespace = {
+  namespaces: string[];
+  versionId: string;
+};

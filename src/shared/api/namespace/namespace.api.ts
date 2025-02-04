@@ -1,5 +1,5 @@
 import { prisma } from "../prisma";
-import type { Namespace } from "./namespace.type";
+import type { MultiNamespace, Namespace } from "./namespace.type";
 
 export async function createNamespace({ namespace, versionId }: Namespace) {
   const res = await prisma.namespace.create({
@@ -45,6 +45,21 @@ export async function getNamespacesByVersion(versionId: string) {
     where: {
       versionId,
     },
+  });
+
+  return res;
+}
+
+export async function createManyNamespaces({
+  namespaces,
+  versionId,
+}: MultiNamespace) {
+  const namespaceData = namespaces.map((namespace) => {
+    return { name: namespace, versionId };
+  });
+
+  const res = await prisma.namespace.createMany({
+    data: namespaceData,
   });
 
   return res;
