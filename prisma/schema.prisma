@@ -26,7 +26,6 @@ model Translation {
   language         language
   translationKeyId String         @db.Uuid
   value            String
-  subKey           String?        @default("")
   textWidth        Float          @db.Real
   isResolved       Boolean
   TranslationKey   TranslationKey @relation(fields: [translationKeyId], references: [id], onDelete: Cascade)
