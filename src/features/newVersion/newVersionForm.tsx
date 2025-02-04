@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 
 import {
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export default function NewVersionForm({ openDialog }: Props) {
+  const router = useRouter();
   const form = useForm<NewVersionFormType>({
     resolver: zodResolver(newVersionFormSchema),
     defaultValues: {
@@ -29,6 +31,7 @@ export default function NewVersionForm({ openDialog }: Props) {
     await saveVersion(values);
 
     openDialog(false);
+    router.push("/");
   }
 
   return (
