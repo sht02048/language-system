@@ -1,5 +1,3 @@
-import { Control } from "react-hook-form";
-
 import {
   FormControl,
   FormDescription,
@@ -10,25 +8,21 @@ import {
 } from "@/src/shared/ui/form";
 import { Input } from "@/src/shared/ui/input";
 
-import type { NewVersionFormType } from "./newVersion.type";
+import type { NewVersionProps } from "./newVersion.type";
 
-type Props = {
-  control: Control<NewVersionFormType>;
-};
-
-export default function NamespaceInput({ control }: Props) {
+export default function VersionInput({ control }: NewVersionProps) {
   return (
     <FormField
       control={control}
       name="version"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Namespace</FormLabel>
+          <FormLabel>Version</FormLabel>
           <FormControl>
             <Input
               className="w-1/3"
               type="text"
-              placeholder="Enter a namespace"
+              placeholder="Enter a version"
               {...field}
             />
           </FormControl>

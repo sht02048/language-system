@@ -13,7 +13,7 @@ export default async function Page() {
     const aDate = new Date(a.createdAt).getTime();
     const bDate = new Date(b.createdAt).getTime();
 
-    return aDate - bDate;
+    return bDate - aDate;
   })[0].name;
 
   redirect(`/table?version=${latestVersion}&namespace=${DEFAULT_NAMESPACE}`);
