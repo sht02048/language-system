@@ -71,9 +71,6 @@ export default function VersionFileInput({ control }: NewVersionProps) {
           if (!_.isEmpty(errors))
             throw new Error("fail to read given csv file");
 
-          console.log(data);
-          console.log(typeof data);
-
           field.onChange(data);
         },
         header: true,

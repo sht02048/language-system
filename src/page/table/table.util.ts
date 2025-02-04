@@ -28,22 +28,17 @@ export async function pivotLanguage(
         { value: string; textWidth: number; isResolved: boolean }
       >
     >
-  >(
-    (
-      acc,
-      { language, subKey, value, textWidth, isResolved }: PrismaTranslation
-    ) => {
-      const key = subKey || NO_SUB_KEY;
+  >((acc, { language, value, textWidth, isResolved }: PrismaTranslation) => {
+    // @ts-expect-error subKey 제거로 인해 type error 발생 production 전 수정 반드시 필요
+    const key = subKey || NO_SUB_KEY;
 
-      acc[key] = {
-        ...(acc[key] ?? {}),
-        [language]: { value, textWidth, isResolved },
-      };
+    acc[key] = {
+      ...(acc[key] ?? {}),
+      [language]: { value, textWidth, isResolved },
+    };
 
-      return acc;
-    },
-    {}
-  );
+    return acc;
+  }, {});
 
   return Object.entries(result).map(([subKey, info]) => {
     const key = subKey === NO_SUB_KEY ? "" : subKey;

@@ -34,6 +34,7 @@ export async function saveTranslation(formData: FormData) {
       namespaceId: namespace.id,
     });
 
+    // TODO subKey 제거로 함수 로직 변경 필요
     if (typeof value === "string") {
       const textWidth = measureTextWidth(value);
 
@@ -49,22 +50,5 @@ export async function saveTranslation(formData: FormData) {
 
       return;
     }
-
-    const subInfo: [string, string][] = Object.entries(value);
-
-    subInfo.forEach(async ([subKey, nestedValue]) => {
-      const textWidth = measureTextWidth(nestedValue);
-
-      await prisma.translation.create({
-        data: {
-          value: nestedValue,
-          translationKeyId: translationKey.id,
-          subKey,
-          language,
-          textWidth,
-          isResolved: false,
-        },
-      });
-    });
   });
 }

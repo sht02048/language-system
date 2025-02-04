@@ -1,4 +1,5 @@
 import { UploadNamespace } from "@/src/features/sideBar";
+import { NewVersion } from "../newVersion";
 
 export default function SideBar() {
   return (
@@ -7,6 +8,7 @@ export default function SideBar() {
         <span className="font-medium text-sm">minsug</span>
         <div className="flex flex-col my-4 gap-2">
           <UploadNamespace />
+          <NewVersion />
         </div>
       </nav>
     </div>
